@@ -14,7 +14,7 @@
 <p align="center">
   <b>Daipayan Chatterjee</b><br>
   M.Sc. Economics | Specialization: Quantitative Economics & Econometrics<br>
-  <a href="https://economics-of-abundant-intelligence.streamlit.app">Live Dashboard</a> &bull;
+  <a href="https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/">Live Dashboard</a> &bull;
   <a href="#methodology">Methodology</a> &bull;
   <a href="#key-findings">Key Findings</a> &bull;
   <a href="#hisi-index">HISI Index</a> &bull;
