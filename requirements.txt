@@ -1,0 +1,14 @@
+streamlit==1.58.0
+pandas==2.3.3
+numpy==2.2.6
+scipy==1.15.3
+scikit-learn==1.7.2
+xgboost==3.2.0
+plotly==6.8.0
+seaborn==0.13.2
+matplotlib==3.10.9
+linearmodels==7.0
+statsmodels==0.14.6
+SQLAlchemy==2.0.50
+wbgapi==1.0.14
+openpyxl==3.1.5
