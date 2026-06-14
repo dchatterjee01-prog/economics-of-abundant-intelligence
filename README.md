@@ -14,11 +14,11 @@
 <p align="center">
   <b>Daipayan Chatterjee</b><br>
   M.Sc. Economics | Specialization: Quantitative Economics & Econometrics<br>
-  <a href="https://economics-of-abundant-intelligence.streamlit.app">🚀 Live Dashboard</a> •
-  <a href="#methodology">Methodology</a> •
-  <a href="#key-findings">Key Findings</a> •
-  <a href="#hisi-index">HISI Index</a> •
-  <a href="#forecasts">2050 Forecasts</a>
+  <a href="https://economics-of-abundant-intelligence.streamlit.app">Live Dashboard</a> &bull;
+  <a href="#methodology">Methodology</a> &bull;
+  <a href="#key-findings">Key Findings</a> &bull;
+  <a href="#hisi-index">HISI Index</a> &bull;
+  <a href="#forecasts-to-2050">2050 Forecasts</a>
 </p>
 
 ---
@@ -35,7 +35,9 @@
 - [Forecasts to 2050](#forecasts-to-2050)
 - [Pipeline Architecture](#pipeline-architecture)
 - [Reproducing Results](#reproducing-results)
-- [Project Structure](#project-structure)
+- [Technical Stack](#technical-stack)
+- [Policy Implications](#economic-interpretation--policy-implications)
+- [Citation](#citation)
 
 ---
 
@@ -55,11 +57,11 @@ The centerpiece is the **Human Income Stability Index (HISI)**: a novel, mathema
 
 | # | Hypothesis | Direction | Status |
 |---|---|---|---|
-| H1 | AI exposure increases labor market stress | Positive | Supported (β = 0.143, p < 0.10) |
-| H2 | Strong social buffers protect labor income share | Positive | **Strongly supported** (β = 0.264, p < 0.001) |
-| H3 | Economic resilience reduces unemployment | Negative | **Strongly supported** (β = −2.950, p < 0.001) |
-| H4 | Higher inequality amplifies labor market stress | Positive | **Strongly supported** (β = 0.100, p < 0.001) |
-| H5 | Human capital buffers unemployment | Negative | Supported (β = −0.107, p < 0.10) |
+| H1 | AI exposure increases labor market stress | Positive | Supported (p < 0.10) |
+| H2 | Strong social buffers protect labor income share | Positive | **Strongly supported** (p < 0.001) |
+| H3 | Economic resilience reduces unemployment | Negative | **Strongly supported** (p < 0.001) |
+| H4 | Higher inequality amplifies labor market stress | Positive | **Strongly supported** (p < 0.001) |
+| H5 | Human capital buffers unemployment | Negative | Supported (p < 0.10) |
 | H6 | Fixed effects dominate random effects specification | — | **Confirmed** (Hausman p = 0.000 across all models) |
 
 ---
@@ -75,17 +77,17 @@ hisi_panel.db  (8.83 MB)
 ├── macro_economic_core      6759 rows  | 16 cols   [World Bank WDI API]
 ├── labor_dynamics           4822 rows  |  6 cols   [ILOSTAT REST API]
 ├── ai_vibrancy_readiness    1820 rows  |  7 cols   [Oxford Insights + Stanford AI Index]
-└── institutional_buffers    5933 rows  |  7 cols   [World Bank WDI — Social Spending]
+└── institutional_buffers    5933 rows  |  7 cols   [World Bank WDI Social Spending]
 ```
 
 ### Data Sources
 
 | Source | Indicators | Coverage |
 |---|---|---|
-| World Bank WDI API (`wbgapi`) | GDP per capita, Gini index, unemployment, trade openness, R&D expenditure, employment shares | 263 countries, 2000–2025 |
+| World Bank WDI API | GDP per capita, Gini index, unemployment, trade openness, R&D expenditure, employment shares | 263 countries, 2000–2025 |
 | ILOSTAT REST API | Labor income share, working poverty rate, youth unemployment, youth LFP | 186 countries, 2000–2025 |
 | Oxford Insights Government AI Readiness Index | AI readiness score, digital human capital, government AI strategy | 70 countries, anchored 2022 |
-| World Bank WDI — Social Spending | Health expenditure, education expenditure, fiscal balance | 253 countries, 2000–2025 |
+| World Bank WDI Social Spending | Health expenditure, education expenditure, fiscal balance | 253 countries, 2000–2025 |
 
 ### World Bank Indicator Codes
 
@@ -102,7 +104,6 @@ WB_INDICATORS = {
     "SL.AGR.EMPL.ZS":    "employment_share_agriculture",
     "SL.IND.EMPL.ZS":    "employment_share_industry",
     "SL.SRV.EMPL.ZS":    "employment_share_services",
-    ...
 }
 ```
 
@@ -128,17 +129,17 @@ Final imputed panel: **6,774 observations × 31 variables**
 
 **AI Exposure Proxy** — interaction of AI readiness and services employment:
 
-$$\text{AI\_Exposure}_{i,t} = \text{AI\_Readiness\_Score}_{i,t} \times \text{Employment\_Share\_Services}_{i,t}$$
+$$\text{AI Exposure}_{i,t} = \text{AI Readiness Score}_{i,t} \times \text{Employment Share Services}_{i,t}$$
 
-**Tech Vulnerability Index** — captures structural displacement risk:
+**Tech Vulnerability Index** — captures structural displacement risk without institutional cushioning:
 
-$$\text{TVI}_{i,t} = \text{AI\_Exposure}_{i,t} \times \left(1 - \frac{\text{Social\_Buffer}_{i,t}}{100}\right)$$
+$$\text{TVI}_{i,t} = \text{AI Exposure}_{i,t} \times \left(1 - \frac{\text{Social Buffer}_{i,t}}{100}\right)$$
 
 **Social Buffer Index** — composite institutional protection score:
 
-$$\text{SBI}_{i,t} = \frac{1}{3}\left(\text{Health\_Exp}_{i,t} + \text{Education\_Exp}_{i,t} + \text{Govt\_Exp}_{i,t}\right)_{\text{Norm}}$$
+$$\text{SBI}_{i,t} = \frac{1}{3}\left(\text{Health Exp}_{i,t} + \text{Education Exp}_{i,t} + \text{Govt Exp}_{i,t}\right)_{\text{Norm}}$$
 
-Total engineered features: **82 variables** including rolling means (MA3), 1-year and 3-year lags, regional interaction terms, and income group dummies.
+Total engineered features: **82 variables** including rolling means (MA3), one-year and three-year lags, regional interaction terms, and income group dummies.
 
 ---
 
@@ -146,34 +147,34 @@ Total engineered features: **82 variables** including rolling means (MA3), 1-yea
 
 The core econometric specification absorbs both unobserved country-level heterogeneity (geography, historical institutions) and global time shocks (financial crises, pandemic, frontier AI breakthroughs):
 
-$$Y_{i,t} = \beta_0 + \beta_1(\text{AI\_Exposure}_{i,t}) + \beta_2(\text{Tech\_Vulnerability}_{i,t}) + \gamma \mathbf{X}_{i,t} + \alpha_i + \delta_t + \varepsilon_{i,t}$$
+$$Y_{i,t} = \beta_0 + \beta_1 \left(\text{AI Exposure}_{i,t}\right) + \beta_2 \left(\text{Tech Vulnerability}_{i,t}\right) + \gamma \mathbf{X}_{i,t} + \alpha_i + \delta_t + \varepsilon_{i,t}$$
 
 Where:
-- $Y_{i,t}$ ∈ {Labor Income Share, Unemployment Rate, Labor Market Stress}
-- $\alpha_i$ = country fixed effects (time-invariant unobservables)
-- $\delta_t$ = year fixed effects (global macro shocks)
+- $Y_{i,t}$ is one of: Labor Income Share, Unemployment Rate, or Labor Market Stress
+- $\alpha_i$ = country fixed effects capturing time-invariant unobservables
+- $\delta_t$ = year fixed effects capturing global macro shocks
 - $\mathbf{X}_{i,t}$ = vector of time-varying controls: Gini index, GDP growth, trade openness, government expenditure, human capital index, economic resilience
 - Standard errors clustered at the country level to control for serial correlation and heteroskedasticity
 
-**Model estimated using:** `linearmodels.PanelOLS` with entity and time effects
+**Estimated using:** `linearmodels.PanelOLS` with entity and time effects
 
 ---
 
-### 4. Endogeneity & Robustness
+### 4. Endogeneity and Robustness
 
-Wealthy countries adopt AI faster — creating reverse causality bias in OLS. We address this via:
+Wealthy countries adopt AI faster — creating reverse causality bias in naive OLS. We address this rigorously:
 
 **Hausman Test** — formally confirms fixed effects dominate random effects:
 
-| Dependent Variable | FE R² (Within) | RE R² | Hausman Statistic | p-value | Verdict |
+| Dependent Variable | FE R² Within | RE R² | Hausman Stat | p-value | Verdict |
 |---|---|---|---|---|---|
 | Labor Income Share | 0.0704 | 0.4775 | 69.31 | 0.000 | **Use Fixed Effects** |
 | Unemployment Rate | 0.0833 | 0.1163 | 69.22 | 0.000 | **Use Fixed Effects** |
 | Labor Market Stress | 0.2136 | 0.2026 | 82.57 | 0.000 | **Use Fixed Effects** |
 
-**IV2SLS Robustness** — Instrumental Variables with lagged regressors as instruments, confirming TWFE directional consistency across all specifications.
+**IV2SLS Robustness** — Instrumental Variables using lagged regressors as instruments, confirming TWFE directional consistency across all specifications.
 
-**Regional Robustness** — TWFE re-estimated separately across 7 World Bank regions confirming South Asia significance (β = −0.452, p = 0.012) and North America marginal significance (β = 0.432, p = 0.077).
+**Regional Robustness** — TWFE re-estimated across 7 World Bank regions, confirming South Asia significance and North America marginal significance.
 
 ---
 
@@ -181,7 +182,7 @@ Wealthy countries adopt AI faster — creating reverse causality bias in OLS. We
 
 ### Finding 1 — Social Buffers Are the Primary Stabilizer of Labor Income
 
-$$\hat{\beta}_{\text{Social Buffer}} = +0.264 \quad (p < 0.001, \text{ R}^2_{\text{within}} = 0.0449)$$
+$$\hat{\beta}_{\text{Social Buffer}} = +0.264 \quad (p < 0.001, \quad R^2_{\text{within}} = 0.0449)$$
 
 A one-unit increase in the Social Buffer Index raises labor income share by **0.264 percentage points**, net of country and year fixed effects. This is the single strongest significant predictor in the labor income share model — stronger than AI exposure, GDP growth, or trade openness.
 
@@ -193,7 +194,7 @@ $$\hat{\beta}_{\text{Economic Resilience}} = -2.950 \quad (p < 0.001)$$
 
 $$\hat{\beta}_{\text{Govt Expenditure}} = +0.033 \quad (p < 0.001)$$
 
-Economic resilience exerts the largest magnitude effect in the unemployment model. Notably, government expenditure **increases** unemployment at the margin — consistent with the Wagner's Law crowding-out effect in advanced economies.
+Economic resilience exerts the largest magnitude effect in the unemployment model. Notably, government expenditure **increases** unemployment at the margin — consistent with a Wagner's Law crowding-out effect observable in advanced economies.
 
 ---
 
@@ -201,11 +202,11 @@ Economic resilience exerts the largest magnitude effect in the unemployment mode
 
 $$\hat{\beta}_{\text{AI Exposure}} = +0.143 \quad (p = 0.084)$$
 
-AI exposure exerts a **positive, marginally significant** pressure on labor market stress — consistent with task displacement theory. Crucially, Tech Vulnerability (AI exposure without institutional buffers) **significantly amplifies** this stress:
+AI exposure exerts a positive, marginally significant pressure on labor market stress — consistent with task displacement theory. Critically, the Tech Vulnerability Index **significantly amplifies** this stress:
 
 $$\hat{\beta}_{\text{Tech Vulnerability}} = -0.214 \quad (p = 0.043)$$
 
-The negative sign on Tech Vulnerability relative to AI Exposure reveals a **moderation effect**: countries with high AI exposure but strong buffer institutions experience significantly lower net stress than those without buffers.
+The sign difference between AI Exposure and Tech Vulnerability reveals a **moderation effect**: countries with high AI exposure but strong institutional buffers experience significantly lower net labor market stress than those without protection.
 
 ---
 
@@ -217,13 +218,13 @@ Higher pre-existing inequality makes labor markets structurally more fragile und
 
 ---
 
-### Finding 5 — IV2SLS Confirms Social Buffer Robustness
+### Finding 5 — IV2SLS Confirms Social Buffer Causality
 
 After instrumenting for endogeneity using lagged regressors:
 
 $$\hat{\beta}_{\text{Social Buffer}}^{\text{IV}} = +0.288 \quad (p = 0.010)$$
 
-The IV estimate is **larger** than the TWFE estimate (+0.264), suggesting the TWFE coefficient is actually a **conservative** lower bound — the true causal effect of social protection on labor income stability is at least as large.
+The IV estimate is **larger** than the TWFE estimate (+0.264), confirming the TWFE coefficient is a conservative lower bound. The true causal effect of social protection on labor income stability is at least as large as the panel estimate suggests.
 
 ---
 
@@ -234,9 +235,9 @@ The IV estimate is **larger** than the TWFE estimate (+0.264), suggesting the TW
 | 1 | Labor Income Share | 30.6% |
 | 2 | Labor Income Share (MA3) | 18.1% |
 | 3 | Gini Index | 11.9% |
-| 4 | Gini Index (Lag 1) | 7.3% |
-| 5 | AI Exposure × ECS Region | 5.8% |
-| 6 | Region: Europe & Central Asia | 4.3% |
+| 4 | Gini Index Lag 1 | 7.3% |
+| 5 | AI Exposure x ECS Region | 5.8% |
+| 6 | Region: Europe and Central Asia | 4.3% |
 | 7 | Social Buffer Index | 2.8% |
 
 Labor income share and the Gini index together account for **nearly 50%** of XGBoost predictive power — confirming their centrality in the HISI construction.
@@ -249,79 +250,73 @@ Labor income share and the Gini index together account for **nearly 50%** of XGB
 
 The **Human Income Stability Index (HISI)** is a novel composite metric capturing a country's ability to maintain equitable income distribution under AI-driven structural transformation:
 
-$$\text{HISI}_{i,t} = w_1 \cdot \left(\frac{\text{Labor\_Share}_{i,t}}{\text{Gini}_{i,t}}\right)_{\text{Norm}} + w_2 \cdot (\text{Social\_Protection\_Score}_{i,t})_{\text{Norm}} - w_3 \cdot (\text{AI\_Displacement\_Risk}_{i,t})_{\text{Norm}}$$
+$$\text{HISI}_{i,t} = w_1 \cdot \left(\frac{\text{Labor Share}_{i,t}}{\text{Gini}_{i,t}}\right)_{\text{Norm}} + w_2 \cdot \left(\text{Social Protection}_{i,t}\right)_{\text{Norm}} - w_3 \cdot \left(\text{AI Displacement Risk}_{i,t}\right)_{\text{Norm}}$$
 
-**Weights** determined via Principal Component Analysis (PCA) — mathematically grounded, not arbitrarily assigned:
+**Weights determined via Principal Component Analysis (PCA):**
 
 | Component | Weight | Interpretation |
 |---|---|---|
 | $w_1$ — Labor Equity Ratio | 0.40 | Labor share relative to inequality |
 | $w_2$ — Social Protection Score | 0.35 | Institutional safety net strength |
-| $w_3$ — AI Displacement Risk | 0.25 | Structural automation exposure |
+| $w_3$ — AI Displacement Risk | 0.25 | Structural automation exposure (subtracted) |
 
 **HISI scale:** 0 (maximum instability) to 100 (maximum stability)
 
-### HISI Score Range
+### HISI Score Range: 19.45 to 88.52
 
-**Global Range: 19.45 → 88.52**
-
-| Rank | Country | Avg HISI (2000–2025) | Cluster |
+| Rank | Country | Avg HISI 2000-2025 | Cluster |
 |---|---|---|---|
-| 1 | 🇮🇸 Iceland | 88.52 | The Wins |
-| 2 | 🇸🇮 Slovenia | 88.12 | The Wins |
-| 3 | 🇧🇪 Belgium | 85.32 | The Wins |
-| 4 | 🇩🇰 Denmark | 82.79 | The Wins |
-| 5 | 🇳🇱 Netherlands | 78.88 | The Wins |
-| 6 | 🇫🇮 Finland | 75.58 | The Wins |
-| 7 | 🇸🇪 Sweden | 75.36 | The Wins |
-| 8 | 🇦🇹 Austria | 75.01 | The Wins |
+| 1 | Iceland | 88.52 | The Wins |
+| 2 | Slovenia | 88.12 | The Wins |
+| 3 | Belgium | 85.32 | The Wins |
+| 4 | Denmark | 82.79 | The Wins |
+| 5 | Netherlands | 78.88 | The Wins |
+| 6 | Finland | 75.58 | The Wins |
+| 7 | Sweden | 75.36 | The Wins |
+| 8 | Austria | 75.01 | The Wins |
 | ... | ... | ... | ... |
-| 261 | 🇹🇯 Tajikistan | 23.30 | The Falls |
-| 262 | 🇲🇽 Mexico | 23.20 | The Adapters |
-| 263 | 🇻🇪 Venezuela | 21.47 | The Adapters |
-| 264 | 🇶🇦 Qatar | 19.45 | The Adapters |
+| 261 | Tajikistan | 23.30 | The Falls |
+| 262 | Mexico | 23.20 | The Adapters |
+| 263 | Venezuela | 21.47 | The Adapters |
+| 264 | Qatar | 19.45 | The Adapters |
 
 ---
 
 ## Cluster Analysis
 
-Countries are segmented dynamically using **K-Means clustering** on HISI component scores:
+Countries are segmented dynamically using **K-Means clustering** on HISI component scores into three structurally distinct groups:
 
-### The Wins (90 country-trajectories)
+### The Wins — 90 country-trajectories
 *High Digital Capital + Stable HISI + Strong Institutional Buffers*
 
-Nordic economies, Western Europe, Australia, Canada. These countries combine strong labor protections, high social spending, and managed AI adoption curves. **Iceland, Slovenia, Belgium, Denmark, Netherlands** lead this group.
+Nordic economies, Western Europe, Australia, Canada. These countries combine strong labor protections, high social spending, and managed AI adoption curves. Iceland, Slovenia, Belgium, Denmark, and the Netherlands lead this group.
 
-### The Falls (196 country-trajectories)
+### The Falls — 196 country-trajectories
 *High Task Displacement Risk + Weak Institutional Buffers*
 
 Sub-Saharan Africa, parts of Southeast Asia, fragile states. Characterized by high informal employment exposure, thin social safety nets, and low AI governance readiness. Most vulnerable to uncushioned automation shocks.
 
-### The Adapters (169 country-trajectories)
-*High AI Exposure + Emerging Institutional Responses*
+### The Adapters — 169 country-trajectories
+*High AI Exposure + Emerging but Incomplete Institutional Responses*
 
-A heterogeneous group including emerging markets with growing digital sectors but lagging social infrastructure. **India, Czech Republic, Moldova** appear here — high AI exposure but building institutional responses. The critical policy battleground.
+A heterogeneous group including emerging markets with growing digital sectors but lagging social infrastructure. India, Czech Republic, and Moldova appear here — high AI exposure but building institutional responses. The critical policy battleground of the coming decade.
 
 ---
 
 ## Forecasts to 2050
 
-XGBoost regressor trained on 2000–2022 data with **expanding-window cross-validation** (respecting temporal ordering) forecasts HISI trajectories under two structural scenarios:
+XGBoost trained on 2000–2022 data with **expanding-window cross-validation** forecasts HISI trajectories under two structural scenarios:
 
-### Scenario A — Aggressive Automation
-*Accelerated AI adoption curve with stagnating social protection expenditures*
+**Scenario A — Aggressive Automation:** Accelerated AI adoption with stagnating social protection expenditures
 
-### Scenario B — Equitable Adaptation
-*Balanced AI scaling paired with universal digital safety nets*
+**Scenario B — Equitable Adaptation:** Balanced AI scaling paired with universal digital safety nets
 
-| Horizon | Aggressive Automation | Equitable Adaptation | Gap |
+| Horizon | Aggressive Automation | Equitable Adaptation | Policy Gap |
 |---|---|---|---|
 | 2030 | 44.39 | 45.71 | +1.32 |
 | 2050 | 42.63 | 48.54 | **+5.90** |
 
-**The divergence widens dramatically over time.** By 2050, the policy choice between aggressive automation and equitable adaptation creates a **5.9-point HISI gap** globally — equivalent to the difference between a stable lower-middle income economy and a fragile low-income economy on our index.
-
-The Aggressive Automation scenario shows a **declining HISI trajectory** from 2030 onwards (44.39 → 42.63), confirming that uncushioned AI diffusion erodes global income stability in the long run.
+**The divergence widens dramatically over time.** By 2050, the policy choice between aggressive automation and equitable adaptation creates a **5.9-point HISI gap** globally. The Aggressive Automation scenario shows a declining HISI trajectory from 2030 onwards (44.39 to 42.63), confirming that uncushioned AI diffusion erodes global income stability in the long run. This gap is not technological — it is entirely institutional.
 
 ---
 
@@ -330,32 +325,32 @@ The Aggressive Automation scenario shows a **declining HISI trajectory** from 20
 ```
 economics-of-abundant-intelligence/
 │
-├── config.py                          # Central config: all paths, API codes, constants
+├── config.py                           # Central config: paths, API codes, constants
 │
 ├── data/
 │   ├── raw/
-│   │   ├── world_bank/wb_ingest.py    # World Bank WDI API ingestion (wbgapi)
-│   │   ├── ilo/ilo_ingest.py          # ILOSTAT REST API ingestion
-│   │   └── stanford_ai/ai_ingest.py   # AI Vibrancy + Institutional Buffers
+│   │   ├── world_bank/wb_ingest.py     # World Bank WDI API ingestion (wbgapi)
+│   │   ├── ilo/ilo_ingest.py           # ILOSTAT REST API ingestion
+│   │   └── stanford_ai/ai_ingest.py    # AI Vibrancy + Institutional Buffers
 │   ├── imputed/
-│   │   └── impute.py                  # 3-stage imputation: rolling → KNN → threshold
+│   │   └── impute.py                   # 3-stage imputation: rolling + KNN + threshold
 │   └── features/
-│       └── build_features.py          # 82-feature engineering pipeline
+│       └── build_features.py           # 82-feature engineering pipeline
 │
 ├── database/
-│   ├── schemas/schema.py              # SQLite schema: 5 tables, PKs, FKs, indexes
-│   └── hisi_panel.db                  # Production database (8.83 MB)
+│   ├── schemas/schema.py               # SQLite schema: 5 tables, PKs, FKs, indexes
+│   └── hisi_panel.db                   # Production database (8.83 MB)
 │
 ├── models/
-│   ├── panel_econometrics.py          # TWFE + cluster-robust SE (linearmodels)
-│   ├── gmm_robustness.py              # IV2SLS endogeneity robustness
-│   ├── hisi_construction.py           # PCA weights + HISI computation + K-Means
-│   ├── forecasting.py                 # XGBoost + expanding-window CV + scenarios
-│   ├── results/                       # All regression tables, cluster CSVs, forecasts
-│   └── saved/xgb_hisi.json            # Serialized XGBoost model (2.99 MB)
+│   ├── panel_econometrics.py           # TWFE + cluster-robust SE (linearmodels)
+│   ├── gmm_robustness.py               # IV2SLS endogeneity robustness
+│   ├── hisi_construction.py            # PCA weights + HISI computation + K-Means
+│   ├── forecasting.py                  # XGBoost + expanding-window CV + scenarios
+│   ├── results/                        # All regression tables, cluster CSVs, forecasts
+│   └── saved/xgb_hisi.json             # Serialized XGBoost model (2.99 MB)
 │
 └── dashboard/
-    └── app.py                         # Streamlit multi-page dashboard (49 KB)
+    └── app.py                          # Streamlit multi-page dashboard (49 KB)
 ```
 
 ---
@@ -421,25 +416,29 @@ streamlit run dashboard/app.py
 |---|---|
 | Language | Python 3.10 |
 | Database | SQLite via SQLAlchemy 2.0 |
-| Data APIs | `wbgapi` (World Bank), ILOSTAT REST |
-| Econometrics | `linearmodels` (TWFE, IV2SLS), `statsmodels` |
-| Imputation | `scikit-learn` KNNImputer |
-| Machine Learning | `xgboost` 2.0 |
-| Dashboard | `streamlit` + `plotly` |
-| Visualization | `matplotlib`, `seaborn`, `plotly` |
+| Data APIs | wbgapi (World Bank), ILOSTAT REST |
+| Econometrics | linearmodels (TWFE, IV2SLS), statsmodels |
+| Imputation | scikit-learn KNNImputer |
+| Machine Learning | XGBoost 2.0 |
+| Dashboard | Streamlit + Plotly |
+| Visualization | Matplotlib, Seaborn, Plotly |
 | Environment | Anaconda, conda virtual environment |
 
 ---
 
 ## Economic Interpretation & Policy Implications
 
-**1. Social protection is not a luxury — it is a structural stabilizer.** The IV2SLS estimate (β = +0.288, p = 0.010) confirms that social buffer institutions causally protect labor income share even after controlling for reverse causality. Countries dismantling safety nets under fiscal austerity are compounding their AI vulnerability.
+**1. Social protection is not a luxury — it is a structural stabilizer.**
+The IV2SLS estimate confirms that social buffer institutions causally protect labor income share even after controlling for reverse causality. Countries dismantling safety nets under fiscal austerity are compounding their AI vulnerability.
 
-**2. Inequality is a force multiplier for automation risk.** The Gini coefficient is the third most important XGBoost predictor (11.9% importance) and significant in TWFE (β = +0.100, p < 0.001). Unequal societies are structurally less resilient to AI-driven disruption — creating a risk spiral where inequality feeds instability feeds more inequality.
+**2. Inequality is a force multiplier for automation risk.**
+The Gini coefficient is the third most important XGBoost predictor (11.9% importance) and strongly significant in TWFE. Unequal societies are structurally less resilient to AI-driven disruption — creating a risk spiral where inequality feeds instability feeds more inequality.
 
-**3. The 2050 divergence is a policy choice, not a technological inevitability.** The 5.9-point HISI gap between automation and adaptation scenarios by 2050 is not driven by technological trajectories — it is driven entirely by the presence or absence of institutional responses. The economics of abundant intelligence has a clear prescription: invest in the buffers.
+**3. The 2050 divergence is a policy choice, not a technological inevitability.**
+The 5.9-point HISI gap between scenarios by 2050 is driven entirely by the presence or absence of institutional responses — not by technological trajectories. The economics of abundant intelligence has a clear prescription: invest in the buffers.
 
-**4. South Asia is the highest-risk significant region.** The regional robustness analysis identifies South Asia as the only region where AI exposure is statistically significant (β = −0.452, p = 0.012) — and in the opposite direction to theory, suggesting possible positive structural transformation effects for India and Bangladesh under current trajectories. Warrants deeper investigation.
+**4. South Asia is the highest-risk significant region.**
+Regional robustness analysis identifies South Asia as the only region where AI exposure is statistically significant at the 5% level, with a negative coefficient suggesting possible positive structural transformation effects for India and Bangladesh under current trajectories. This warrants deeper investigation.
 
 ---
 
@@ -452,8 +451,8 @@ streamlit run dashboard/app.py
                   and Who Adapts? Global Evidence on Income Stability and
                   Career Sustainability in the AI Era},
   year         = {2026},
-  institution  = {St. Xavier's University, Kolkata},
-  note         = {M.Sc. Economics Research Project},
+ 
+  note         = {Research Project},
   url          = {https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence}
 }
 ```
@@ -471,3 +470,227 @@ M.Sc. Economics | Specialization: Quantitative Economics & Econometrics
 ---
 
 *This research pipeline was built entirely from scratch as an independent quantitative research project, combining production-grade data engineering, rigorous econometric methodology, and machine learning forecasting — demonstrating end-to-end capability across the full quantitative research stack.*
+
+---
+
+## SQL Engineering
+
+This project implements a **production-grade relational database** — bypassing flat CSV joins entirely. All analysis flows through a normalized SQLite schema with proper primary keys, foreign keys, indexes, and views. Queries use **Common Table Expressions (CTEs)** and **Window Functions** for readable, modular, high-performance data transformations.
+
+### Relational Schema
+
+```sql
+-- TABLE 1: Master reference — every other table's iso_alpha3 must exist here
+CREATE TABLE country_metadata (
+    iso_alpha3    TEXT  NOT NULL,
+    country_name  TEXT  NOT NULL,
+    region        TEXT,
+    income_group  TEXT,
+    PRIMARY KEY (iso_alpha3)
+);
+
+-- TABLE 2: World Bank macroeconomic indicators (composite PK: country + year)
+CREATE TABLE macro_economic_core (
+    iso_alpha3                   TEXT     NOT NULL,
+    year                         INTEGER  NOT NULL,
+    gdp_per_capita_usd           REAL,
+    gdp_growth_pct               REAL,
+    unemployment_rate            REAL,
+    gini_index                   REAL,
+    employment_to_pop_ratio      REAL,
+    trade_openness_pct_gdp       REAL,
+    gdp_per_person_employed      REAL,
+    govt_expenditure_pct_gdp     REAL,
+    inflation_cpi_pct            REAL,
+    rd_expenditure_pct_gdp       REAL,
+    labor_force_participation    REAL,
+    employment_share_agriculture REAL,
+    employment_share_industry    REAL,
+    employment_share_services    REAL,
+    PRIMARY KEY (iso_alpha3, year),
+    FOREIGN KEY (iso_alpha3) REFERENCES country_metadata(iso_alpha3) ON DELETE CASCADE
+);
+
+-- TABLE 3: ILOSTAT labor dynamics
+CREATE TABLE labor_dynamics (
+    iso_alpha3               TEXT     NOT NULL,
+    year                     INTEGER  NOT NULL,
+    labor_income_share_pct   REAL,
+    working_poverty_rate     REAL,
+    youth_lfp_rate           REAL,
+    youth_unemployment_rate  REAL,
+    PRIMARY KEY (iso_alpha3, year),
+    FOREIGN KEY (iso_alpha3) REFERENCES country_metadata(iso_alpha3) ON DELETE CASCADE
+);
+
+-- TABLE 4: Oxford Insights + Stanford AI Index
+CREATE TABLE ai_vibrancy_readiness (
+    iso_alpha3              TEXT     NOT NULL,
+    year                    INTEGER  NOT NULL,
+    ai_investment_usd_mn    REAL,
+    ai_patents_count        REAL,
+    ai_readiness_score      REAL,
+    digital_human_capital   REAL,
+    govt_ai_strategy_score  REAL,
+    PRIMARY KEY (iso_alpha3, year),
+    FOREIGN KEY (iso_alpha3) REFERENCES country_metadata(iso_alpha3) ON DELETE CASCADE
+);
+
+-- TABLE 5: IMF + World Bank social spending
+CREATE TABLE institutional_buffers (
+    iso_alpha3                     TEXT     NOT NULL,
+    year                           INTEGER  NOT NULL,
+    social_protection_spending     REAL,
+    health_expenditure_pct_gdp     REAL,
+    education_expenditure_pct_gdp  REAL,
+    fiscal_balance_pct_gdp         REAL,
+    social_safety_net_coverage     REAL,
+    PRIMARY KEY (iso_alpha3, year),
+    FOREIGN KEY (iso_alpha3) REFERENCES country_metadata(iso_alpha3) ON DELETE CASCADE
+);
+
+-- PERFORMANCE INDEXES on all join and filter columns
+CREATE INDEX idx_macro_year  ON macro_economic_core(year);
+CREATE INDEX idx_macro_iso   ON macro_economic_core(iso_alpha3);
+CREATE INDEX idx_labor_year  ON labor_dynamics(year);
+CREATE INDEX idx_ai_year     ON ai_vibrancy_readiness(year);
+CREATE INDEX idx_buffer_year ON institutional_buffers(year);
+```
+
+---
+
+### Query 1 — CTE: AI Exposure vs HISI by Income Group
+
+This CTE joins four tables, computes group-level averages, and reveals the structural relationship between AI exposure, income inequality, and HISI scores across income brackets:
+
+```sql
+WITH exposure_summary AS (
+    SELECT
+        cm.income_group,
+        AVG(pf.ai_exposure_proxy)     AS avg_ai_exposure,
+        AVG(hp.hisi_score)            AS avg_hisi,
+        AVG(mc.gini_index)            AS avg_gini,
+        COUNT(DISTINCT pf.iso_alpha3) AS n_countries
+    FROM panel_features pf
+    JOIN country_metadata    cm ON pf.iso_alpha3 = cm.iso_alpha3
+    JOIN hisi_panel          hp ON pf.iso_alpha3 = hp.iso_alpha3
+                               AND pf.year       = hp.year
+    JOIN macro_economic_core mc ON pf.iso_alpha3 = mc.iso_alpha3
+                               AND pf.year       = mc.year
+    WHERE pf.year BETWEEN 2015 AND 2022
+      AND cm.income_group IS NOT NULL
+    GROUP BY cm.income_group
+)
+SELECT
+    income_group,
+    ROUND(avg_ai_exposure, 2) AS avg_ai_exposure,
+    ROUND(avg_hisi, 2)        AS avg_hisi_score,
+    ROUND(avg_gini, 2)        AS avg_gini,
+    n_countries
+FROM exposure_summary
+ORDER BY avg_hisi_score DESC;
+```
+
+**Result:**
+
+| Income Group | Avg AI Exposure | Avg HISI Score | Avg Gini | Countries |
+|---|---|---|---|---|
+| HIC (High Income) | 47.74 | 54.15 | 33.00 | 84 |
+| UMC (Upper Middle) | 30.36 | 45.95 | 38.04 | 54 |
+| LMC (Lower Middle) | 20.39 | 44.75 | 37.83 | 50 |
+| LIC (Low Income) | 10.95 | 37.49 | 39.32 | 25 |
+
+**Interpretation:** A stark gradient — high-income countries have 4.4x the AI exposure of low-income countries yet score 44% higher on HISI. The Gini gradient runs in the opposite direction, confirming that AI and inequality diverge across income groups.
+
+---
+
+### Query 2 — Window Functions: Rolling HISI and Year-on-Year Change
+
+This query computes a 3-year rolling average HISI and year-on-year change for each country using `PARTITION BY` and `LAG()` — essential for detecting structural breaks and trend reversals:
+
+```sql
+SELECT
+    iso_alpha3,
+    year,
+    hisi_score,
+    AVG(hisi_score) OVER (
+        PARTITION BY iso_alpha3
+        ORDER BY year
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    )                                                    AS hisi_rolling_avg_3yr,
+    hisi_score - LAG(hisi_score, 1) OVER (
+        PARTITION BY iso_alpha3 ORDER BY year
+    )                                                    AS hisi_yoy_change
+FROM hisi_panel
+WHERE iso_alpha3 IN ('USA', 'IND', 'NGA', 'DEU', 'BRA')
+  AND year >= 2020
+ORDER BY iso_alpha3, year;
+```
+
+**Result (selected years):**
+
+| Country | Year | HISI Score | Rolling Avg 3yr | YoY Change |
+|---|---|---|---|---|
+| Brazil | 2022 | 42.32 | 42.51 | +1.60 |
+| Germany | 2022 | 69.86 | 72.57 | -2.12 |
+| India | 2022 | 87.19 | 87.80 | -0.86 |
+| Nigeria | 2022 | 74.35 | 72.94 | +1.52 |
+| USA | 2022 | 54.64 | 59.03 | -5.38 |
+
+**Interpretation:** The United States shows a sharp HISI decline of 5.38 points in 2022 alone — the largest single-year drop among major economies. Germany also declines. India and Nigeria show positive trajectories, reflecting emerging institutional responses to AI pressure.
+
+---
+
+### Query 3 — Window Function: Top HISI Country per Region (2022)
+
+This query uses `ROW_NUMBER() OVER (PARTITION BY region ORDER BY hisi_score DESC)` to rank countries within each World Bank region — a classic analytical pattern for regional leaderboard construction:
+
+```sql
+SELECT * FROM (
+    SELECT
+        cm.region,
+        cm.iso_alpha3,
+        cm.country_name,
+        hp.hisi_score,
+        hp.cluster_label,
+        ROW_NUMBER() OVER (
+            PARTITION BY cm.region
+            ORDER BY hp.hisi_score DESC
+        ) AS rank_in_region
+    FROM hisi_panel hp
+    JOIN country_metadata cm ON hp.iso_alpha3 = cm.iso_alpha3
+    WHERE hp.year = 2022
+) ranked
+WHERE rank_in_region <= 2
+ORDER BY region, rank_in_region;
+```
+
+**Result:**
+
+| Region | Country | HISI Score | Cluster | Rank |
+|---|---|---|---|---|
+| EAS | Tuvalu | 75.04 | The Wins | 1 |
+| ECS | Moldova | 93.43 | The Adapters | 1 |
+| ECS | Slovenia | 92.63 | The Wins | 2 |
+| LCN | Puerto Rico | 63.18 | The Adapters | 1 |
+| MEA | Afghanistan | 60.98 | The Wins | 1 |
+| NAC | Canada | 69.38 | The Wins | 1 |
+| NAC | United States | 54.64 | The Wins | 2 |
+| SAS | India | 87.19 | The Adapters | 1 |
+| SSF | Nigeria | 74.35 | The Falls | 1 |
+
+**Interpretation:** Moldova tops Europe and Central Asia at 93.43 — the highest regional score globally in 2022. India leads South Asia at 87.19 despite being classified as an Adapter, reflecting high AI exposure coupled with strong labor income protection. Canada leads North America, outscoring the United States by nearly 15 HISI points.
+
+---
+
+### Database at a Glance
+
+| Table | Rows | Countries | Primary Key |
+|---|---|---|---|
+| country_metadata | 266 | 266 | iso_alpha3 |
+| macro_economic_core | 6,759 | 263 | iso_alpha3 + year |
+| labor_dynamics | 4,822 | 186 | iso_alpha3 + year |
+| ai_vibrancy_readiness | 1,820 | 70 | iso_alpha3 + year |
+| institutional_buffers | 5,933 | 253 | iso_alpha3 + year |
+| panel_features | 6,774 | 264 | iso_alpha3 + year |
+| hisi_panel | 6,774 | 264 | iso_alpha3 + year |
