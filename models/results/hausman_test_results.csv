@@ -1,0 +1,4 @@
+dependent_var,fe_r2_within,re_r2,hausman_stat,hausman_pval,verdict
+labor_income_share_pct,0.0704,0.4775,69.3094,0.0,USE FIXED EFFECTS
+unemployment_rate,0.0833,0.1163,69.2238,0.0,USE FIXED EFFECTS
+labor_market_stress,0.2136,0.2026,82.5695,0.0,USE FIXED EFFECTS

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Environments
+hisi_env/
+.env
+*.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+logs/
+*.log
+
+# Large model files
+models/ml/
+models/pkl/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
