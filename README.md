@@ -692,6 +692,6 @@ ORDER BY region, rank_in_region;
 
 If you use this work, please cite:
 
-**Chatterjee, Daipayan** (2025). *The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era.* M.Sc. Economics Independent Quantitative Research Project. Specialization: Quantitative Economics and Econometrics.
+**Chatterjee, Daipayan** (2026). *The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era.* M.Sc. Economics (Specialization: Quantitative Economics and Econometrics).
 
 GitHub: https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence
