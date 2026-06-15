@@ -696,7 +696,7 @@ If you use this data pipeline, econometric framework, or simulation platform in 
   title  = {The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era},
   year   = {2026},
   note   = {M.Sc. Economics Research Project, West Bengal State University},
-  url    = {[https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/](https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/)}
+  url    = {https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/}
 }
 
 ---
