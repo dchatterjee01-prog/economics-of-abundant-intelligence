@@ -696,19 +696,5 @@ If you use this data pipeline, econometric framework, or simulation platform in 
   title  = {The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era},
   year   = {2026},
   note   = {M.Sc. Economics Research Project, West Bengal State University},
-  url    = {https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/}
+  url    = {[https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/](https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/)}
 }
-
----
-
-## Author
-
-**Daipayan Chatterjee**
-M.Sc. Economics | Quantitative Economics & Econometrics
-
-[![GitHub](https://img.shields.io/badge/GitHub-dchatterjee01--prog-black?style=flat&logo=github)](https://github.com/dchatterjee01-prog)
-[![Dashboard](https://img.shields.io/badge/Live%20App-Streamlit-FF4B4B?style=flat&logo=streamlit)](https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/)
-
----
-
-*This research pipeline was built entirely from scratch as an independent quantitative research project, combining production-grade data engineering, rigorous panel econometrics, and machine learning forecasting — demonstrating end-to-end capability across the full quantitative research stack.*
