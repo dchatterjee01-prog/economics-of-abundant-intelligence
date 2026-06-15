@@ -13,12 +13,27 @@
 
 <p align="center">
   <b>Daipayan Chatterjee</b><br>
-  M.Sc. Economics | Specialization: Quantitative Economics & Econometrics<br>
-  <a href="https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/">Live Dashboard</a> &bull;
+  M.Sc. Economics | Specialization: Quantitative Economics &amp; Econometrics<br>
+</p>
+
+<p align="center">
+  <a href="https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/">
+    <img src="https://img.shields.io/badge/Live%20Dashboard-Launch%20App-FF4B4B?style=for-the-badge&logo=streamlit" />
+  </a>
+  &nbsp;
+  <a href="Economics_of_Abundant_Intelligence_Daipayan_Chatterjee.pptx">
+    <img src="https://img.shields.io/badge/Presentation-Download%20PPT-B7472A?style=for-the-badge&logo=microsoft-powerpoint" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="#research-overview">Overview</a> &bull;
+  <a href="#research-hypotheses">Hypotheses</a> &bull;
   <a href="#methodology">Methodology</a> &bull;
   <a href="#key-findings">Key Findings</a> &bull;
   <a href="#hisi-index">HISI Index</a> &bull;
-  <a href="#forecasts-to-2050">2050 Forecasts</a>
+  <a href="#forecasts-to-2050">2050 Forecasts</a> &bull;
+  <a href="#reproducing-results">Reproduce</a>
 </p>
 
 ---
@@ -37,6 +52,7 @@
 - [Reproducing Results](#reproducing-results)
 - [Technical Stack](#technical-stack)
 - [Policy Implications](#economic-interpretation--policy-implications)
+- [SQL Engineering](#sql-engineering)
 - [Citation](#citation)
 
 ---
@@ -202,11 +218,11 @@ Economic resilience exerts the largest magnitude effect in the unemployment mode
 
 $$\hat{\beta}_{\text{AI Exposure}} = +0.143 \quad (p = 0.084)$$
 
-AI exposure exerts a positive, marginally significant pressure on labor market stress — consistent with task displacement theory. Critically, the Tech Vulnerability Index **significantly amplifies** this stress:
+AI exposure exerts a positive, marginally significant pressure on labor market stress — consistent with task displacement theory. Critically, the Tech Vulnerability Index **significantly moderates** this stress:
 
 $$\hat{\beta}_{\text{Tech Vulnerability}} = -0.214 \quad (p = 0.043)$$
 
-The sign difference between AI Exposure and Tech Vulnerability reveals a **moderation effect**: countries with high AI exposure but strong institutional buffers experience significantly lower net labor market stress than those without protection.
+The sign difference reveals a **moderation effect**: countries with high AI exposure but strong institutional buffers experience significantly lower net labor market stress than those without protection.
 
 ---
 
@@ -236,7 +252,7 @@ The IV estimate is **larger** than the TWFE estimate (+0.264), confirming the TW
 | 2 | Labor Income Share (MA3) | 18.1% |
 | 3 | Gini Index | 11.9% |
 | 4 | Gini Index Lag 1 | 7.3% |
-| 5 | AI Exposure x ECS Region | 5.8% |
+| 5 | AI Exposure × ECS Region | 5.8% |
 | 6 | Region: Europe and Central Asia | 4.3% |
 | 7 | Social Buffer Index | 2.8% |
 
@@ -264,7 +280,7 @@ $$\text{HISI}_{i,t} = w_1 \cdot \left(\frac{\text{Labor Share}_{i,t}}{\text{Gini
 
 ### HISI Score Range: 19.45 to 88.52
 
-| Rank | Country | Avg HISI 2000-2025 | Cluster |
+| Rank | Country | Avg HISI 2000–2025 | Cluster |
 |---|---|---|---|
 | 1 | Iceland | 88.52 | The Wins |
 | 2 | Slovenia | 88.12 | The Wins |
@@ -284,20 +300,20 @@ $$\text{HISI}_{i,t} = w_1 \cdot \left(\frac{\text{Labor Share}_{i,t}}{\text{Gini
 
 ## Cluster Analysis
 
-Countries are segmented dynamically using **K-Means clustering** on HISI component scores into three structurally distinct groups:
+Countries are segmented dynamically using **Gaussian Mixture Models (GMM)** on HISI component scores into three structurally distinct groups:
 
-### The Wins — 90 country-trajectories
-*High Digital Capital + Stable HISI + Strong Institutional Buffers*
+### The Wins
+*High Digital Capital · Stable HISI · Strong Institutional Buffers*
 
 Nordic economies, Western Europe, Australia, Canada. These countries combine strong labor protections, high social spending, and managed AI adoption curves. Iceland, Slovenia, Belgium, Denmark, and the Netherlands lead this group.
 
-### The Falls — 196 country-trajectories
-*High Task Displacement Risk + Weak Institutional Buffers*
+### The Falls
+*High Task Displacement Risk · Weak Institutional Buffers*
 
 Sub-Saharan Africa, parts of Southeast Asia, fragile states. Characterized by high informal employment exposure, thin social safety nets, and low AI governance readiness. Most vulnerable to uncushioned automation shocks.
 
-### The Adapters — 169 country-trajectories
-*High AI Exposure + Emerging but Incomplete Institutional Responses*
+### The Adapters
+*High AI Exposure · Emerging but Incomplete Institutional Responses*
 
 A heterogeneous group including emerging markets with growing digital sectors but lagging social infrastructure. India, Czech Republic, and Moldova appear here — high AI exposure but building institutional responses. The critical policy battleground of the coming decade.
 
@@ -305,18 +321,18 @@ A heterogeneous group including emerging markets with growing digital sectors bu
 
 ## Forecasts to 2050
 
-XGBoost trained on 2000–2022 data with **expanding-window cross-validation** forecasts HISI trajectories under two structural scenarios:
+XGBoost trained on 2000–2022 data with **expanding-window cross-validation** (CV R² = 0.990, RMSE = 1.47) forecasts HISI trajectories under two structural scenarios:
 
-**Scenario A — Aggressive Automation:** Accelerated AI adoption with stagnating social protection expenditures
+**Scenario A — Aggressive Automation:** Accelerated AI adoption (+5%/yr) with stagnating social protection (−2%/yr) and flat R&D.
 
-**Scenario B — Equitable Adaptation:** Balanced AI scaling paired with universal digital safety nets
+**Scenario B — Equitable Adaptation:** Balanced AI scaling (+3%/yr) paired with growing social protection (+3%/yr) and rising R&D (+1%/yr).
 
 | Horizon | Aggressive Automation | Equitable Adaptation | Policy Gap |
 |---|---|---|---|
 | 2030 | 44.39 | 45.71 | +1.32 |
 | 2050 | 42.63 | 48.54 | **+5.90** |
 
-**The divergence widens dramatically over time.** By 2050, the policy choice between aggressive automation and equitable adaptation creates a **5.9-point HISI gap** globally. The Aggressive Automation scenario shows a declining HISI trajectory from 2030 onwards (44.39 to 42.63), confirming that uncushioned AI diffusion erodes global income stability in the long run. This gap is not technological — it is entirely institutional.
+**The divergence widens dramatically over time.** By 2050, the policy choice between aggressive automation and equitable adaptation creates a **5.9-point HISI gap** globally. This gap is not technological — it is entirely institutional.
 
 ---
 
@@ -326,6 +342,7 @@ XGBoost trained on 2000–2022 data with **expanding-window cross-validation** f
 economics-of-abundant-intelligence/
 │
 ├── config.py                           # Central config: paths, API codes, constants
+├── verify_project.py                   # Full project file verification (100% green)
 │
 ├── data/
 │   ├── raw/
@@ -338,19 +355,24 @@ economics-of-abundant-intelligence/
 │       └── build_features.py           # 82-feature engineering pipeline
 │
 ├── database/
-│   ├── schemas/schema.py               # SQLite schema: 5 tables, PKs, FKs, indexes
-│   └── hisi_panel.db                   # Production database (8.83 MB)
+│   └── hisi_panel.db                   # Production database (8.83 MB, 7 tables)
 │
 ├── models/
 │   ├── panel_econometrics.py           # TWFE + cluster-robust SE (linearmodels)
 │   ├── gmm_robustness.py               # IV2SLS endogeneity robustness
-│   ├── hisi_construction.py            # PCA weights + HISI computation + K-Means
+│   ├── hisi_construction.py            # PCA weights + HISI computation + GMM clustering
 │   ├── forecasting.py                  # XGBoost + expanding-window CV + scenarios
 │   ├── results/                        # All regression tables, cluster CSVs, forecasts
 │   └── saved/xgb_hisi.json             # Serialized XGBoost model (2.99 MB)
 │
-└── dashboard/
-    └── app.py                          # Streamlit multi-page dashboard (49 KB)
+├── dashboard/
+│   └── app.py                          # Streamlit 4-page intelligence dashboard
+│
+├── js-powerpoint/
+│   └── Economics_of_Abundant_Intelligence_Daipayan_Chatterjee.pptx
+│
+└── notebooks/
+    └── phase1_verify.py                # Phase 1 data pipeline verification (13/13 passed)
 ```
 
 ---
@@ -372,13 +394,7 @@ conda activate hisi_env
 pip install pandas numpy scipy sqlalchemy wbgapi statsmodels linearmodels scikit-learn xgboost streamlit plotly seaborn matplotlib
 ```
 
-### 3. Initialize the database
-
-```bash
-python database/schemas/schema.py
-```
-
-### 4. Run the full ingestion pipeline
+### 3. Run the full ingestion pipeline
 
 ```bash
 python data/raw/world_bank/wb_ingest.py
@@ -386,14 +402,14 @@ python data/raw/ilo/ilo_ingest.py
 python data/raw/stanford_ai/ai_ingest.py
 ```
 
-### 5. Impute and build features
+### 4. Impute and build features
 
 ```bash
 python data/imputed/impute.py
 python data/features/build_features.py
 ```
 
-### 6. Run econometric models and construct HISI
+### 5. Run econometric models and construct HISI
 
 ```bash
 python models/panel_econometrics.py
@@ -402,11 +418,21 @@ python models/hisi_construction.py
 python models/forecasting.py
 ```
 
-### 7. Launch the dashboard
+### 6. Launch the dashboard locally
 
 ```bash
 streamlit run dashboard/app.py
 ```
+
+Open `http://localhost:8501` in your browser.
+
+### 7. Verify all files
+
+```bash
+python verify_project.py
+```
+
+All 20+ checks should return `[  OK  ]`.
 
 ---
 
@@ -415,14 +441,16 @@ streamlit run dashboard/app.py
 | Layer | Technology |
 |---|---|
 | Language | Python 3.10 |
+| Environment | Anaconda, VS Code, Windows 11 |
 | Database | SQLite via SQLAlchemy 2.0 |
 | Data APIs | wbgapi (World Bank), ILOSTAT REST |
-| Econometrics | linearmodels (TWFE, IV2SLS), statsmodels |
-| Imputation | scikit-learn KNNImputer |
-| Machine Learning | XGBoost 2.0 |
+| Panel Econometrics | linearmodels (TWFE, IV2SLS), statsmodels |
+| Imputation | scikit-learn KNNImputer + pandas rolling |
+| Machine Learning | XGBoost 2.0 (rolling expanding-window CV) |
+| Dimensionality Reduction | scikit-learn PCA |
+| Clustering | scikit-learn GaussianMixture |
 | Dashboard | Streamlit + Plotly |
-| Visualization | Matplotlib, Seaborn, Plotly |
-| Environment | Anaconda, conda virtual environment |
+| Version Control | Git + GitHub |
 
 ---
 
@@ -438,38 +466,7 @@ The Gini coefficient is the third most important XGBoost predictor (11.9% import
 The 5.9-point HISI gap between scenarios by 2050 is driven entirely by the presence or absence of institutional responses — not by technological trajectories. The economics of abundant intelligence has a clear prescription: invest in the buffers.
 
 **4. South Asia is the highest-risk significant region.**
-Regional robustness analysis identifies South Asia as the only region where AI exposure is statistically significant at the 5% level, with a negative coefficient suggesting possible positive structural transformation effects for India and Bangladesh under current trajectories. This warrants deeper investigation.
-
----
-
-## Citation
-
-```bibtex
-@misc{chatterjee2026hisi,
-  author       = {Chatterjee, Daipayan},
-  title        = {The Economics of Abundant Intelligence: Who Wins, Who Falls,
-                  and Who Adapts? Global Evidence on Income Stability and
-                  Career Sustainability in the AI Era},
-  year         = {2026},
- 
-  note         = {Research Project},
-  url          = {https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence}
-}
-```
-
----
-
-## Author
-
-**Daipayan Chatterjee**
-M.Sc. Economics | Specialization: Quantitative Economics & Econometrics
-
-
-[![GitHub](https://img.shields.io/badge/GitHub-dchatterjee01--prog-black?style=flat&logo=github)](https://github.com/dchatterjee01-prog)
-
----
-
-*This research pipeline was built entirely from scratch as an independent quantitative research project, combining production-grade data engineering, rigorous econometric methodology, and machine learning forecasting — demonstrating end-to-end capability across the full quantitative research stack.*
+Regional robustness analysis identifies South Asia as the only region where AI exposure is statistically significant at the 5% level. This warrants deeper investigation into the heterogeneous within-region effects across India, Bangladesh, and Pakistan.
 
 ---
 
@@ -480,7 +477,7 @@ This project implements a **production-grade relational database** — bypassing
 ### Relational Schema
 
 ```sql
--- TABLE 1: Master reference — every other table's iso_alpha3 must exist here
+-- TABLE 1: Master reference
 CREATE TABLE country_metadata (
     iso_alpha3    TEXT  NOT NULL,
     country_name  TEXT  NOT NULL,
@@ -489,7 +486,7 @@ CREATE TABLE country_metadata (
     PRIMARY KEY (iso_alpha3)
 );
 
--- TABLE 2: World Bank macroeconomic indicators (composite PK: country + year)
+-- TABLE 2: World Bank macroeconomic indicators
 CREATE TABLE macro_economic_core (
     iso_alpha3                   TEXT     NOT NULL,
     year                         INTEGER  NOT NULL,
@@ -549,7 +546,7 @@ CREATE TABLE institutional_buffers (
     FOREIGN KEY (iso_alpha3) REFERENCES country_metadata(iso_alpha3) ON DELETE CASCADE
 );
 
--- PERFORMANCE INDEXES on all join and filter columns
+-- PERFORMANCE INDEXES
 CREATE INDEX idx_macro_year  ON macro_economic_core(year);
 CREATE INDEX idx_macro_iso   ON macro_economic_core(iso_alpha3);
 CREATE INDEX idx_labor_year  ON labor_dynamics(year);
@@ -560,8 +557,6 @@ CREATE INDEX idx_buffer_year ON institutional_buffers(year);
 ---
 
 ### Query 1 — CTE: AI Exposure vs HISI by Income Group
-
-This CTE joins four tables, computes group-level averages, and reveals the structural relationship between AI exposure, income inequality, and HISI scores across income brackets:
 
 ```sql
 WITH exposure_summary AS (
@@ -600,13 +595,11 @@ ORDER BY avg_hisi_score DESC;
 | LMC (Lower Middle) | 20.39 | 44.75 | 37.83 | 50 |
 | LIC (Low Income) | 10.95 | 37.49 | 39.32 | 25 |
 
-**Interpretation:** A stark gradient — high-income countries have 4.4x the AI exposure of low-income countries yet score 44% higher on HISI. The Gini gradient runs in the opposite direction, confirming that AI and inequality diverge across income groups.
+**Interpretation:** High-income countries have 4.4x the AI exposure of low-income countries yet score 44% higher on HISI. The Gini gradient runs in the opposite direction — confirming that AI and inequality diverge systematically across income groups.
 
 ---
 
 ### Query 2 — Window Functions: Rolling HISI and Year-on-Year Change
-
-This query computes a 3-year rolling average HISI and year-on-year change for each country using `PARTITION BY` and `LAG()` — essential for detecting structural breaks and trend reversals:
 
 ```sql
 SELECT
@@ -627,23 +620,21 @@ WHERE iso_alpha3 IN ('USA', 'IND', 'NGA', 'DEU', 'BRA')
 ORDER BY iso_alpha3, year;
 ```
 
-**Result (selected years):**
+**Result (2022):**
 
 | Country | Year | HISI Score | Rolling Avg 3yr | YoY Change |
 |---|---|---|---|---|
 | Brazil | 2022 | 42.32 | 42.51 | +1.60 |
-| Germany | 2022 | 69.86 | 72.57 | -2.12 |
-| India | 2022 | 87.19 | 87.80 | -0.86 |
+| Germany | 2022 | 69.86 | 72.57 | −2.12 |
+| India | 2022 | 87.19 | 87.80 | −0.86 |
 | Nigeria | 2022 | 74.35 | 72.94 | +1.52 |
-| USA | 2022 | 54.64 | 59.03 | -5.38 |
+| USA | 2022 | 54.64 | 59.03 | **−5.38** |
 
-**Interpretation:** The United States shows a sharp HISI decline of 5.38 points in 2022 alone — the largest single-year drop among major economies. Germany also declines. India and Nigeria show positive trajectories, reflecting emerging institutional responses to AI pressure.
+**Interpretation:** The United States shows a sharp HISI decline of 5.38 points in 2022 — the largest single-year drop among major economies. Germany also declines. India and Nigeria show positive trajectories.
 
 ---
 
 ### Query 3 — Window Function: Top HISI Country per Region (2022)
-
-This query uses `ROW_NUMBER() OVER (PARTITION BY region ORDER BY hisi_score DESC)` to rank countries within each World Bank region — a classic analytical pattern for regional leaderboard construction:
 
 ```sql
 SELECT * FROM (
@@ -679,8 +670,6 @@ ORDER BY region, rank_in_region;
 | SAS | India | 87.19 | The Adapters | 1 |
 | SSF | Nigeria | 74.35 | The Falls | 1 |
 
-**Interpretation:** Moldova tops Europe and Central Asia at 93.43 — the highest regional score globally in 2022. India leads South Asia at 87.19 despite being classified as an Adapter, reflecting high AI exposure coupled with strong labor income protection. Canada leads North America, outscoring the United States by nearly 15 HISI points.
-
 ---
 
 ### Database at a Glance
@@ -694,3 +683,33 @@ ORDER BY region, rank_in_region;
 | institutional_buffers | 5,933 | 253 | iso_alpha3 + year |
 | panel_features | 6,774 | 264 | iso_alpha3 + year |
 | hisi_panel | 6,774 | 264 | iso_alpha3 + year |
+
+---
+
+## Citation
+
+```bibtex
+@misc{chatterjee2026hisi,
+  author = {Chatterjee, Daipayan},
+  title  = {The Economics of Abundant Intelligence: Who Wins, Who Falls,
+             and Who Adapts? Global Evidence on Income Stability and
+             Career Sustainability in the AI Era},
+  year   = {2026},
+  note   = {M.Sc. Economics Research Project, West Bengal State University},
+  url    = {https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/}
+}
+```
+
+---
+
+## Author
+
+**Daipayan Chatterjee**
+M.Sc. Economics | Quantitative Economics & Econometrics
+
+[![GitHub](https://img.shields.io/badge/GitHub-dchatterjee01--prog-black?style=flat&logo=github)](https://github.com/dchatterjee01-prog)
+[![Dashboard](https://img.shields.io/badge/Live%20App-Streamlit-FF4B4B?style=flat&logo=streamlit)](https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/)
+
+---
+
+*This research pipeline was built entirely from scratch as an independent quantitative research project, combining production-grade data engineering, rigorous panel econometrics, and machine learning forecasting — demonstrating end-to-end capability across the full quantitative research stack.*
