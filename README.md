@@ -686,15 +686,12 @@ ORDER BY region, rank_in_region;
 
 ---
 
+---
+
 ## Citation
 
-```bibtex
-@misc{Chatterjee2025AI,
-  author = {Chatterjee, Daipayan},
-  title  = {The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era},
-  year   = {2025},
-  note   = {M.Sc. Economics Independent Quantitative Research Project. 
-            Specialization: Quantitative Economics and Econometrics},
-  url    = {https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence}
-}
-```
+If you use this work, please cite:
+
+**Chatterjee, Daipayan** (2025). *The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era.* M.Sc. Economics Independent Quantitative Research Project. Specialization: Quantitative Economics and Econometrics.
+
+GitHub: https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence
