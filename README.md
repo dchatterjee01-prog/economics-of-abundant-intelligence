@@ -686,15 +686,10 @@ ORDER BY region, rank_in_region;
 
 ---
 
-## Citation
-
-If you use this data pipeline, econometric framework, or simulation platform in an academic or professional capacity, please cite it using the following BibTeX entry:
-
-```bibtex
 @misc{chatterjee2026hisi,
-  author = {Chatterjee, Daipayan},
-  title  = {The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era},
-  year   = {2026},
-  note   = {M.Sc. Economics Research Project, West Bengal State University},
-  url    = {[https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/](https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/)}
+  author       = {Chatterjee, Daipayan},
+  title        = {The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era},
+  year         = {2026},
+  howpublished = {\url{https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/}},
+  note         = {M.Sc. Economics}
 }
