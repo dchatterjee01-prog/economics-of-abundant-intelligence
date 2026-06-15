@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this research or dashboard platform in your work, please cite it as below."
+authors:
+  - family-names: "Chatterjee"
+    given-names: "Daipayan"
+title: "The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? Global Evidence on Income Stability and Career Sustainability in the AI Era"
+version: "1.0.0"
+date-released: "2026-06-15"
+url: "https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/"
