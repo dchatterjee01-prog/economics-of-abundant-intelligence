@@ -685,19 +685,16 @@ ORDER BY region, rank_in_region;
 | hisi_panel | 6,774 | 264 | iso_alpha3 + year |
 
 ---
-
 ## Citation
 
 ```bibtex
 @misc{Chatterjee2025AI,
-  author    = {Chatterjee, Daipayan},
-  title     = {The Economics of Abundant Intelligence: Who Wins, Who Falls,
-               and Who Adapts? Global Evidence on Income Stability and
-               Career Sustainability in the AI Era},
-  year      = {2025},
-  note      = {M.Sc. Economics Independent Quantitative Research Project,
-               Specialization: Quantitative Economics \& Econometrics},
-  url       = {https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence},
-  demo      = {https://economics-of-abundant-intelligence-daipayan-chatterjee.streamlit.app/}
+  author = {Chatterjee, Daipayan},
+  title  = {The Economics of Abundant Intelligence: Who Wins, Who Falls, and Who Adapts? 
+            Global Evidence on Income Stability and Career Sustainability in the AI Era},
+  year   = {2025},
+  note   = {M.Sc. Economics Independent Quantitative Research Project. 
+            Specialization: Quantitative Economics and Econometrics},
+  url    = {https://github.com/dchatterjee01-prog/economics-of-abundant-intelligence}
 }
 ```
